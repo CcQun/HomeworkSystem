@@ -34,5 +34,7 @@ public abstract class AbstractService<E, PK> {
         getMapper().save(e);
     }
 
-
+    public void saveAll(List<E> list){
+        getMapper().saveAll(list);
+    }
 }

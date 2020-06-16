@@ -2,17 +2,17 @@
   Created by IntelliJ IDEA.
   User: Lenovo
   Date: 2020/6/16
-  Time: 13:19
+  Time: 20:27
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>添加作业结果</title>
+    <title>提交作业结果</title>
     <script>
-        function backTeacher(id) {
-            let teacherId = document.getElementById("teacherId")
-            teacherId.setAttribute("value", id)
+        function backStudent(id) {
+            let studentId = document.getElementById("studentId")
+            studentId.setAttribute("value", id)
             let back = document.getElementById("back")
             back.submit()
         }
@@ -22,14 +22,14 @@
 <div align="center">
     <%
         String msg = (String) request.getAttribute("msg");
-        String teacher_number = (String) request.getAttribute("teacher_number");
+        String student_number = (String) request.getAttribute("student_number");
     %>
     <p style="margin: 50px; font-family: 'Arial Black'; font-size: 45px; color: darkgreen"><%=msg%></p>
-    <form id="back" action="${pageContext.request.contextPath}/jsp/backTeacher" method="post">
+    <form id="back" action="${pageContext.request.contextPath}/jsp/backStudent" method="post">
         <table style="line-height: 40px">
-            <input id="teacherId" name="teacher_number" type="hidden">
+            <input id="studentId" name="student_number" type="hidden">
             <tr align="center">
-                <td><input type="button" width="100%" value="返回主页" onclick="backTeacher(<%=teacher_number%>)"></td>
+                <td><input type="button" width="100%" value="返回主页" onclick="backStudent(<%=student_number%>)"></td>
             </tr>
         </table>
     </form>

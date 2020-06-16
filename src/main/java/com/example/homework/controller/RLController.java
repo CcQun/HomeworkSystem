@@ -52,7 +52,7 @@ public class RLController {
                     if(Utils.getMD5(password).equals(list.get(0).getStudent_password())){
                         req.setAttribute("code",1);
                         req.setAttribute("msg","登录成功");
-                        req.setAttribute("teacher_number",req.getParameter("id"));
+                        req.setAttribute("student_number",req.getParameter("id"));
                         req.getRequestDispatcher("/WEB-INF/jsp/student.jsp").forward(req,resp);
                     }else{
                         req.setAttribute("code",0);
