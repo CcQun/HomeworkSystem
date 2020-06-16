@@ -30,5 +30,9 @@ public abstract class AbstractService<E, PK> {
         return list;
     }
 
+    public void save(E e) {
+        getMapper().save(e);
+    }
+
 
 }

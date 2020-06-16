@@ -14,7 +14,7 @@
 <div align="center">
     <h2 align="center">请选择以下操作</h2>
     <ul style="line-height: 40px">
-        <li><a href="${pageContext.request.contextPath}*****">查看作业</a></li>
+        <li><a href="${pageContext.request.contextPath}/student/getHomework">查看作业</a></li>
     </ul>
 </div>
 </body>

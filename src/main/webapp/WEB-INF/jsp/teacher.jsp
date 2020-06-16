@@ -9,14 +9,29 @@
 <html>
 <head>
     <title>老师主页</title>
+    <script>
+        function addHomework(id) {
+            let teacherId = document.getElementById("teacherId")
+            teacherId.setAttribute("value", id)
+            let addHK = document.getElementById("addHK")
+            addHK.submit()
+        }
+    </script>
 </head>
 <body>
+<%
+    String teacher_number = (String)request.getAttribute("teacher_number");
+%>
 <div align="center">
     <h2 align="center">请选择以下操作</h2>
-    <ul style="line-height: 40px">
-        <li><a href="${pageContext.request.contextPath}*****">发布作业</a></li>
-        <li><a href="${pageContext.request.contextPath}*****">查看我发布的作业</a></li>
-    </ul>
+    <form id="addHK" action="${pageContext.request.contextPath}/jsp/gotoAddHomework" method="post">
+        <table style="line-height: 40px">
+            <input id="teacherId" name="teacher_number" type="hidden">
+            <tr align="center">
+                <td><input type="button" width="100%" value="添加作业" onclick="addHomework(<%=teacher_number%>)"></td>
+            </tr>
+        </table>
+    </form>
 </div>
 </body>
 </html>

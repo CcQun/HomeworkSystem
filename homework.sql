@@ -6,7 +6,7 @@ USE HOMEWORK;
 
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020/6/14 8:39:11                            */
+/* Created on:     2020/6/16 17:13:57                           */
 /*==============================================================*/
 
 
@@ -23,15 +23,15 @@ drop table if exists Teacher;
 /*==============================================================*/
 create table Homework
 (
-   homework_number      int not null,
-   teacher_number       int not null,
-   homework_title       char(50) not null,
-   homework_content     char(255) not null,
-   homework_state       int not null,
-   create_time          date not null,
-   update_time          date not null,
-   end_time             date not null,
-   primary key (homework_number)
+    homework_number      int not null,
+    teacher_number       int not null,
+    homework_title       char(50) not null,
+    homework_content     char(255) not null,
+    homework_state       char(30) not null,
+    create_time          datetime not null,
+    update_time          datetime not null,
+    end_time             datetime not null,
+    primary key (homework_number)
 );
 
 /*==============================================================*/
@@ -39,10 +39,10 @@ create table Homework
 /*==============================================================*/
 create table Student
 (
-   student_number       int not null,
-   student_name         char(30) not null,
-   student_password     char(120) not null,
-   primary key (student_number)
+    student_number       int not null,
+    student_name         char(30) not null,
+    student_password     char(120) not null,
+    primary key (student_number)
 );
 
 /*==============================================================*/
@@ -50,15 +50,15 @@ create table Student
 /*==============================================================*/
 create table Submit
 (
-   homework_number      int not null,
-   student_number       int not null,
-   submit_title         char(50) not null,
-   submit_content       char(255) not null,
-   grade                int,
-   comment              char(120),
-   create_time          date not null,
-   update_time          date not null,
-   primary key (homework_number, student_number)
+    homework_number      int not null,
+    student_number       int not null,
+    submit_title         char(50) not null,
+    submit_content       char(255) not null,
+    grade                int,
+    comment              char(120),
+    create_time          datetime not null,
+    update_time          datetime not null,
+    primary key (homework_number, student_number)
 );
 
 /*==============================================================*/
@@ -66,20 +66,21 @@ create table Submit
 /*==============================================================*/
 create table Teacher
 (
-   teacher_number       int not null,
-   teacher_name         char(30) not null,
-   teacher_password     char(120) not null,
-   primary key (teacher_number)
+    teacher_number       int not null,
+    teacher_name         char(30) not null,
+    teacher_password     char(120) not null,
+    primary key (teacher_number)
 );
 
 alter table Homework add constraint FK_publish foreign key (teacher_number)
-      references Teacher (teacher_number) on delete restrict on update restrict;
+    references Teacher (teacher_number) on delete restrict on update restrict;
 
 alter table Submit add constraint FK_Submit foreign key (homework_number)
-      references Homework (homework_number) on delete restrict on update restrict;
+    references Homework (homework_number) on delete restrict on update restrict;
 
 alter table Submit add constraint FK_Submit2 foreign key (student_number)
-      references Student (student_number) on delete restrict on update restrict;
+    references Student (student_number) on delete restrict on update restrict;
+
 
 insert into Student
 values (17301091, '崔超群', 'E10ADC3949BA59ABBE56E057F20F883E');
@@ -101,15 +102,15 @@ values (10000003, '袁岗', 'E10ADC3949BA59ABBE56E057F20F883E');
 
 insert into Homework
 values (1, 10000001, '自学spring cloud','结合课上所讲的内容自学spring cloud',
-        0,DATE('2018-12-22 15:15:19'),DATE('2018-12-22 15:15:19'),DATE('2018-12-30 20:00:00'));
+        '已结束',DATE('2018-12-22 15:15:19'),DATE('2018-12-22 15:15:19'),DATE('2018-12-30 20:00:00'));
 
 insert into Homework
 values (2, 10000001, '复习spring mvc','复习spring mvc的基础知识',
-        0,DATE('2018-11-12 14:15:29'),DATE('2018-11-12 14:15:29'),DATE('2018-11-20 18:00:00'));
+        '已结束',DATE('2018-11-12 14:15:29'),DATE('2018-11-12 14:15:29'),DATE('2018-11-20 18:00:00'));
 
 insert into Homework
 values (3, 10000002, '完成数据建模','完成小组项目的用例建模过程',
-        0,DATE('2020-6-12 05:30:50'),DATE('2020-6-12 05:30:50'),DATE('2020-6-30 05:30:00'));
+        '进行中',DATE('2020-6-12 05:30:50'),DATE('2020-6-12 05:30:50'),DATE('2020-6-30 05:30:00'));
 
 insert into Submit
 values (1, 17301091, 'spring cloud自学笔记','基本完成了自学过程',90,'完成效果极佳',

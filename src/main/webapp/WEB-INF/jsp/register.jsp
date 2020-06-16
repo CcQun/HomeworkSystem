@@ -11,24 +11,32 @@
     <title>注册</title>
 </head>
 <body>
-<h2>登录</h2>
-<form action="${pageContext.request.contextPath}/rl/register" method="post">
-    <table style="line-height: 40px">
-        <tr>
-            <th>类型：</th>
-            <td><input type="radio" name="ts" value="0" required/>学生
-                <input type="radio" name="ts" value="1" required/>老师</td>
-        </tr>
-        <tr>
-            <th>密码：</th>
-            <td><input type="password" name="password" maxlength="20" size="40" style="font-family: 'Arial Black'"
-                       required/></td>
-        </tr>
-        <tr align="center">
-            <td><input type="submit" value="注册"></td>
-        </tr>
-    </table>
-</form>
-<a href="${pageContext.request.contextPath}/jsp/login">返回登录页面</a>
+<div align="center">
+    <h2>注册</h2>
+    <form action="${pageContext.request.contextPath}/rl/register" method="post">
+        <table style="line-height: 40px">
+            <tr>
+                <th>类型：</th>
+                <td><input type="radio" name="ts" value="0" required/>学生
+                    <input type="radio" name="ts" value="1" required/>老师
+                </td>
+            </tr>
+            <tr>
+                <th>密码：</th>
+                <td><input type="password" name="password" maxlength="20" size="40" style="font-family: 'Arial Black'"
+                           required/></td>
+            </tr>
+            <tr>
+                <th>姓名：</th>
+                <td><input type="text" name="name" maxlength="20" size="40" style="font-family: 'Arial Black'"
+                           required/></td>
+            </tr>
+            <tr align="center">
+                <td><input type="submit" value="注册"></td>
+            </tr>
+        </table>
+    </form>
+    <a href="${pageContext.request.contextPath}/jsp/login">返回登录页面</a>
+</div>
 </body>
 </html>

@@ -1,15 +1,15 @@
 package com.example.homework.db.model;
 
-import com.example.homework.db.model.pk.HomeworkPK;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.Persistable;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -23,26 +23,19 @@ import java.util.Date;
 @Builder
 @Data
 @Table(name="Homework")
-public class Homework implements Persistable{
-    @EmbeddedId
-    private HomeworkPK homework_pk;
+@DynamicInsert
+@DynamicUpdate
+public class Homework{
+    @Id
+    private Integer homework_number;
+    private Integer teacher_number;
     private String homework_title;
     private String homework_content;
-    private Integer homework_state;
+    private String homework_state;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:SS")
     private Date create_time;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:SS")
     private Date update_time;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:SS")
     private Date end_time;
-
-    @Override
-    public Object getId() {
-        return homework_pk;
-    }
-
-    @Override
-    public boolean isNew() {
-        return false;
-    }
 }

@@ -1,6 +1,9 @@
 package com.example.homework.core;
 
 import java.security.MessageDigest;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @Author CcQun
@@ -26,5 +29,23 @@ public class Utils {
             throw new RuntimeException();
         }
         return md5StrBuff.toString().toUpperCase();//字母大写
+    }
+
+    public static Date strToDateLong(String strDate) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        ParsePosition pos = new ParsePosition(0);
+        Date strtodate = formatter.parse(strDate, pos);
+        return strtodate;
+    }
+
+    public static String getState(Date create_time,Date end_time){
+        Date now = new Date();
+        if(now.after(create_time) && now.before(end_time)){
+            return "进行中";
+        }else if(now.before(create_time)){
+            return "未开始";
+        }else{
+            return "已结束";
+        }
     }
 }
