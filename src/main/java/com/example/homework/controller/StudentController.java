@@ -4,7 +4,7 @@ import com.example.homework.core.Utils;
 import com.example.homework.db.model.Homework;
 import com.example.homework.db.model.Submit;
 import com.example.homework.db.model.Teacher;
-import com.example.homework.db.model.cm.HKWithTName;
+import com.example.homework.core.cm.HKWithTName;
 import com.example.homework.db.model.pk.SubmitPK;
 import com.example.homework.db.service.HomeworkService;
 import com.example.homework.db.service.SubmitService;

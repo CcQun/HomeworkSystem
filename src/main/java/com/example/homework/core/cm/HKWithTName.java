@@ -1,4 +1,4 @@
-package com.example.homework.db.model.cm;
+package com.example.homework.core.cm;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

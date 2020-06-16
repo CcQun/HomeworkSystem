@@ -1,4 +1,4 @@
-<%@ page import="com.example.homework.db.model.cm.HKWithTName" %>
+<%@ page import="com.example.homework.core.cm.HKWithTName" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Lenovo
