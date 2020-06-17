@@ -18,24 +18,35 @@
             let teacher = document.getElementById("teacherId")
             teacher.setAttribute("value", teacher_number)
             let submit = document.getElementById("submit")
+            submit.setAttribute("action", "${pageContext.request.contextPath}/teacher/submitCondition")
+            submit.submit()
+        }
+        function gotoStatisticalCondition(homework_number, teacher_number) {
+            let homework = document.getElementById("homeworkId")
+            homework.setAttribute("value", homework_number)
+            let teacher = document.getElementById("teacherId")
+            teacher.setAttribute("value", teacher_number)
+            let submit = document.getElementById("submit")
+            submit.setAttribute("action", "${pageContext.request.contextPath}/teacher/statisticalCondition")
             submit.submit()
         }
     </script>
 </head>
 <body>
-<form id="submit" method="post" action="${pageContext.request.contextPath}/teacher/gotoSubmitCondition">
+<form id="submit" method="post">
     <input id="homeworkId" name="homework_number" type="hidden">
     <input id="teacherId" name="teacher_number" type="hidden">
     <table align="center" width="1300" border="1">
         <tr>
             <th width="5%">作业id</th>
             <th width="10%" style="word-break: break-all;word-wrap: break-word;">作业标题</th>
-            <th width="30%" style="word-break: break-all;word-wrap: break-word;">作业内容</th>
+            <th width="25%" style="word-break: break-all;word-wrap: break-word;">作业内容</th>
             <th width="5%">作业状态</th>
             <th width="15%">更新时间</th>
             <th width="15%">开始时间</th>
             <th width="15%">截止时间</th>
             <th width="5%">查看提交信息</th>
+            <th width="5%">查看统计信息</th>
         </tr>
         <%
             String teacher_number = (String) request.getAttribute("teacher_number");
@@ -62,6 +73,8 @@
             </td>
             <td><input type="button" width="100%" value="查看提交情况" align="center"
                        onclick="gotoSubmitCondition(<%=homework.getHomework_number()%>,<%=teacher_number%>)"></td>
+            <td><input type="button" width="100%" value="查看作业统计" align="center"
+                       onclick="gotoStatisticalCondition(<%=homework.getHomework_number()%>,<%=teacher_number%>)"></td>
         </tr>
         <%
                 }

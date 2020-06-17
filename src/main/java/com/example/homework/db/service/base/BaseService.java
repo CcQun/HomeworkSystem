@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @Author CcQun
- * @Date 2020/5/19 15:36
+ * @Date 2020/6/15 15:36
  */
 public abstract class BaseService<E, PK, M extends BaseMapper<E, PK>> extends AbstractService<E, PK> {
     @Autowired

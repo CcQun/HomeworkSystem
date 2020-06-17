@@ -1,10 +1,13 @@
 package com.example.homework.controller;
 
 import com.example.homework.core.Utils;
+import com.example.homework.core.cm.HKInforSTT;
 import com.example.homework.db.model.Homework;
+import com.example.homework.db.model.Student;
 import com.example.homework.db.model.Submit;
 import com.example.homework.db.model.pk.SubmitPK;
 import com.example.homework.db.service.HomeworkService;
+import com.example.homework.db.service.StudentService;
 import com.example.homework.db.service.SubmitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,10 +29,13 @@ public class TeacherController {
     private final HomeworkService homeworkService;
     @Autowired
     private final SubmitService submitService;
+    @Autowired
+    private final StudentService studentService;
 
-    public TeacherController(HomeworkService homeworkService,SubmitService submitService) {
+    public TeacherController(HomeworkService homeworkService, SubmitService submitService, StudentService studentService) {
         this.homeworkService = homeworkService;
         this.submitService = submitService;
+        this.studentService = studentService;
     }
 
     /**
@@ -86,8 +92,14 @@ public class TeacherController {
         req.getRequestDispatcher("/WEB-INF/jsp/getMyHomework.jsp").forward(req,resp);
     }
 
-    @RequestMapping("/gotoSubmitCondition")
-    public void gotoSubmitCondition(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+    /**
+     * 获取某作业的提交状况
+     * @param req
+     * @param resp
+     * @throws Exception
+     */
+    @RequestMapping("/submitCondition")
+    public void submitCondition(HttpServletRequest req, HttpServletResponse resp) throws Exception{
         Integer homework_number = Integer.parseInt(req.getParameter("homework_number"));
         SubmitPK submitPK = SubmitPK.builder().homework_number(homework_number).build();
         Submit submit = Submit.builder().submit_pk(submitPK).build();
@@ -104,12 +116,76 @@ public class TeacherController {
         }
     }
 
+    /**
+     * 获取某作业的统计情况
+     * @param req
+     * @param resp
+     * @throws Exception
+     */
+    @RequestMapping("/statisticalCondition")
+    public void statisticalCondition(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+        Integer homework_number = Integer.parseInt(req.getParameter("homework_number"));
+        SubmitPK submitPK = SubmitPK.builder().homework_number(homework_number).build();
+        Submit submit = Submit.builder().submit_pk(submitPK).build();
+        List<Submit> list = submitService.findAll(submit);
+        Integer to_evaluate_student_count = 0;
+        Integer pass_student_count = 0;
+        Integer submit_student_count = list.size();
+        Double average = 0.0;
+        Integer max_point = 0;
+        Integer min_point = 10000;
+        String max_point_owner = "";
+        Integer sum_point = 0;
+        for (int i = 0;i < list.size();i++){
+            Integer grade = list.get(i).getGrade();
+            if(grade == null){
+                to_evaluate_student_count += 1;
+            }else{
+                if(grade >= 60){
+                    pass_student_count += 1;
+                }
+                sum_point += grade;
+                if(grade >= max_point){
+                    max_point = grade;
+                    Integer max_student_number = list.get(i).getSubmit_pk().getStudent_number();
+                    Student stu = Student.builder().student_number(max_student_number).build();
+                    max_point_owner = studentService.findAll(stu).get(0).getStudent_name();
+                }
+                if(grade <= min_point){
+                    min_point = grade;
+                }
+            }
+        }
+        if(submit_student_count.equals(to_evaluate_student_count)){
+            min_point = 0;
+        }
+        if(sum_point != 0) {
+            average = Double.valueOf(sum_point / (submit_student_count - to_evaluate_student_count));
+        }
+        HKInforSTT hkInforSTT = HKInforSTT.builder()
+                .average(average)
+                .max_point(max_point)
+                .min_point(min_point)
+                .max_point_owner(max_point_owner)
+                .pass_student_count(pass_student_count)
+                .submit_student_count(submit_student_count)
+                .to_evaluate_student_count(to_evaluate_student_count)
+                .build();
+        req.setAttribute("stt",hkInforSTT);
+        req.setAttribute("teacher_number",req.getParameter("teacher_number"));
+        req.getRequestDispatcher("/WEB-INF/jsp/statisticalCondition.jsp").forward(req,resp);
+    }
+
     @RequestMapping("/submitGrade")
     public void submitGrade(HttpServletRequest req, HttpServletResponse resp) throws Exception{
         Integer homework_number = Integer.parseInt(req.getParameter("homework_number"));
         Integer student_number = Integer.parseInt(req.getParameter("student_number"));
-        Integer grade = Integer.parseInt(req.getParameter("grade"));
-        String comment = req.getParameter("comment");
+        String temp = req.getParameter("temp");
+        Integer grade = Integer.parseInt(req.getParameter("grade" + temp));
+        String comment = req.getParameter("comment" + temp);
+
+        System.out.println(grade);
+        System.out.println(comment);
         SubmitPK submitPK = SubmitPK.builder()
                 .homework_number(homework_number)
                 .student_number(student_number)

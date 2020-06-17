@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @Author CcQun
- * @Date 2020/5/19 15:27
+ * @Date 2020/6/15 15:27
  */
 public abstract class AbstractService<E, PK> {
     protected abstract BaseMapper<E, PK> getMapper();
