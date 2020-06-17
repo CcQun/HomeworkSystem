@@ -30,7 +30,7 @@
         <th width="5%">作业id</th>
         <th width="5%">学生id</th>
         <th width="10%" style="word-break: break-all;word-wrap: break-word;">作业标题</th>
-        <th width="30%" style="word-break: break-all;word-wrap: break-word;">作答内容</th>
+        <th width="25%" style="word-break: break-all;word-wrap: break-word;">作答内容</th>
         <th width="5%">成绩</th>
         <th width="15%">评价</th>
         <th width="15%">提交时间</th>

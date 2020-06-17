@@ -17,16 +17,27 @@
             let student = document.getElementById("studentId")
             student.setAttribute("value", student_number)
             let submit = document.getElementById("submit")
-            submit.setAttribute("action","${pageContext.request.contextPath}/jsp/gotoSubmitHomework")
+            submit.setAttribute("action", "${pageContext.request.contextPath}/jsp/gotoSubmitHomework")
             submit.submit()
         }
+
         function gotoEdit(homework_number, student_number) {
             let homework = document.getElementById("homeworkId")
             homework.setAttribute("value", homework_number)
             let student = document.getElementById("studentId")
             student.setAttribute("value", student_number)
             let submit = document.getElementById("submit")
-            submit.setAttribute("action","${pageContext.request.contextPath}/jsp/gotoEditHomework")
+            submit.setAttribute("action", "${pageContext.request.contextPath}/jsp/gotoEditHomework")
+            submit.submit()
+        }
+
+        function mySubmit(homework_number, student_number) {
+            let homework = document.getElementById("homeworkId")
+            homework.setAttribute("value", homework_number)
+            let student = document.getElementById("studentId")
+            student.setAttribute("value", student_number)
+            let submit = document.getElementById("submit")
+            submit.setAttribute("action", "${pageContext.request.contextPath}/student/mySubmit")
             submit.submit()
         }
     </script>
@@ -40,13 +51,14 @@
             <th width="5%">作业id</th>
             <th width="5%">老师</th>
             <th width="10%" style="word-break: break-all;word-wrap: break-word;">作业标题</th>
-            <th width="20%" style="word-break: break-all;word-wrap: break-word;">作业内容</th>
+            <th width="15%" style="word-break: break-all;word-wrap: break-word;">作业内容</th>
             <th width="5%">作业状态</th>
             <th width="5%">提交状态</th>
             <th width="15%">更新时间</th>
             <th width="15%">开始时间</th>
             <th width="15%">截止时间</th>
-            <th width="5%">作业提交信息</th>
+            <th width="5%">作业提交</th>
+            <th width="5%">查看作业</th>
         </tr>
         <%
             String student_number = (String) request.getAttribute("student_number");
@@ -88,7 +100,23 @@
             <td><input type="button" width="100%" value="编辑作业" align="center"
                        onclick="gotoEdit(<%=hkWithTNS.getHomework_number()%>,<%=student_number%>)"></td>
             <%
-                            }
+                }
+            } else {
+            %>
+            <td><%=hkWithTNS.getHomework_state()%>
+            </td>
+            <%
+                }
+                if (hkWithTNS.getSubmit_state().equals("已提交")) {
+            %>
+            <td><input type="button" width="100%" value="查看我的提交" align="center"
+                       onclick="mySubmit(<%=hkWithTNS.getHomework_number()%>,<%=student_number%>)"></td>
+            <%
+            } else {
+            %>
+            <td><%=hkWithTNS.getSubmit_state()%>
+            </td>
+            <%
                         }
                     }
                 }

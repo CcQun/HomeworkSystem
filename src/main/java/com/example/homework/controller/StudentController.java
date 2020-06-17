@@ -137,4 +137,19 @@ public class StudentController {
         req.setAttribute("student_number",req.getParameter("student_number"));
         req.getRequestDispatcher("/WEB-INF/jsp/editHomeworkResult.jsp").forward(req,resp);
     }
+
+    @RequestMapping("/mySubmit")
+    public void mySubmit(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+        Integer homework_number = Integer.parseInt(req.getParameter("homework_number"));
+        Integer student_number = Integer.parseInt(req.getParameter("student_number"));
+        SubmitPK submitPK = SubmitPK.builder()
+                .homework_number(homework_number)
+                .student_number(student_number)
+                .build();
+        Submit submit = Submit.builder().submit_pk(submitPK).build();
+        List<Submit> list = submitService.findAll(submit);
+        req.setAttribute("submit",list.get(0));
+        req.setAttribute("student_number",req.getParameter("student_number"));
+        req.getRequestDispatcher("/WEB-INF/jsp/mySubmit.jsp").forward(req,resp);
+    }
 }
