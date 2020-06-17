@@ -1,7 +1,6 @@
 package com.example.homework.controller;
 
 import com.example.homework.core.Utils;
-import com.example.homework.core.response.BaseResponse;
 import com.example.homework.db.model.Student;
 import com.example.homework.db.model.Teacher;
 import com.example.homework.db.service.StudentService;
@@ -10,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 /**

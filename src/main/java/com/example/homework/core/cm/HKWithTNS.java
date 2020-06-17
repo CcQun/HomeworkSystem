@@ -16,12 +16,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class HKWithTName {
+public class HKWithTNS {
     private Integer homework_number;
     private String teacher_name;
     private String homework_title;
     private String homework_content;
     private String homework_state;
+    private String submit_state;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:SS")
     private Date create_time;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:SS")

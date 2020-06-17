@@ -84,6 +84,26 @@ public class JspController {
     }
 
     /**
+     * 前往编辑作业的页面
+     * @param req
+     * @param resp
+     * @throws Exception
+     */
+    @RequestMapping("/gotoEditHomework")
+    public void gotoEditHomework(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+        Integer student_number = Integer.parseInt(req.getParameter("student_number"));
+        Integer homework_number = Integer.parseInt(req.getParameter("homework_number"));
+        SubmitPK submitPK = SubmitPK.builder().homework_number(homework_number)
+                .student_number(student_number)
+                .build();
+        List<Submit> query = submitService.findAll(Submit.builder().submit_pk(submitPK).build());
+        req.setAttribute("submit",query.get(0));
+        req.setAttribute("student_number",req.getParameter("student_number"));
+        req.setAttribute("homework_number",req.getParameter("homework_number"));
+        req.getRequestDispatcher("/WEB-INF/jsp/editHomework.jsp").forward(req,resp);
+    }
+
+    /**
      * 返回老师的主页
      * @param req
      * @param resp
