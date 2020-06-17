@@ -29,12 +29,6 @@
             submit.setAttribute("action","${pageContext.request.contextPath}/jsp/gotoEditHomework")
             submit.submit()
         }
-        function backStudent(id) {
-            let studentId = document.getElementById("stuId")
-            studentId.setAttribute("value", id)
-            let back = document.getElementById("back")
-            back.submit()
-        }
     </script>
 </head>
 <body>
@@ -104,9 +98,9 @@
 </form>
 <form id="back" action="${pageContext.request.contextPath}/jsp/backStudent" method="post">
     <table style="line-height: 40px">
-        <input id="stuId" name="student_number" type="hidden">
+        <input id="stuId" name="student_number" value="<%=student_number%>" type="hidden">
         <tr align="center">
-            <td><input type="button" width="100%" value="返回主页" onclick="backStudent(<%=student_number%>)"></td>
+            <td><input type="submit" value="返回主页"></td>
         </tr>
     </table>
 </form>

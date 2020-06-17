@@ -9,14 +9,6 @@
 <html>
 <head>
     <title>添加作业结果</title>
-    <script>
-        function backTeacher(id) {
-            let teacherId = document.getElementById("teacherId")
-            teacherId.setAttribute("value", id)
-            let back = document.getElementById("back")
-            back.submit()
-        }
-    </script>
 </head>
 <body>
 <div align="center">
@@ -27,9 +19,9 @@
     <p style="margin: 50px; font-family: 'Arial Black'; font-size: 45px; color: darkgreen"><%=msg%></p>
     <form id="back" action="${pageContext.request.contextPath}/jsp/backTeacher" method="post">
         <table style="line-height: 40px">
-            <input id="teacherId" name="teacher_number" type="hidden">
+            <input id="teaId" name="teacher_number" value="<%=teacher_number%>" type="hidden">
             <tr align="center">
-                <td><input type="button" width="100%" value="返回主页" onclick="backTeacher(<%=teacher_number%>)"></td>
+                <td><input type="submit" value="返回主页"></td>
             </tr>
         </table>
     </form>

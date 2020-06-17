@@ -10,14 +10,6 @@
 <head>
     <title>学生主页</title>
 </head>
-<script>
-    function getHomework(id) {
-        let studentId = document.getElementById("studentId")
-        studentId.setAttribute("value", id)
-        let getHK = document.getElementById("getHK")
-        getHK.submit()
-    }
-</script>
 <body>
 <%
     String student_number = (String)request.getAttribute("student_number");
@@ -26,12 +18,13 @@
     <h2 align="center">请选择以下操作</h2>
     <form id="getHK" action="${pageContext.request.contextPath}/student/getHomework" method="post">
         <table style="line-height: 40px">
-            <input id="studentId" name="student_number" type="hidden">
+            <input id="studentId" name="student_number" value="<%=student_number%>" type="hidden">
             <tr align="center">
-                <td><input type="button" width="100%" value="查看作业" onclick="getHomework(<%=student_number%>)"></td>
+                <td><input type="submit" value="查看作业"></td>
             </tr>
         </table>
     </form>
+    <a href="${pageContext.request.contextPath}/jsp/login">注销登录</a>
 </div>
 </body>
 </html>

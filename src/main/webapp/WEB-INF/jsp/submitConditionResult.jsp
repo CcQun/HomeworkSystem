@@ -2,24 +2,24 @@
   Created by IntelliJ IDEA.
   User: Lenovo
   Date: 2020/6/17
-  Time: 8:51
+  Time: 11:10
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>编辑作业结果</title>
+    <title>查看作业提交状况结果</title>
 </head>
 <body>
 <div align="center">
     <%
         String msg = (String) request.getAttribute("msg");
-        String student_number = (String) request.getAttribute("student_number");
+        String teacher_number = (String) request.getAttribute("teacher_number");
     %>
     <p style="margin: 50px; font-family: 'Arial Black'; font-size: 45px; color: darkgreen"><%=msg%></p>
-    <form id="back" action="${pageContext.request.contextPath}/jsp/backStudent" method="post">
+    <form id="back" action="${pageContext.request.contextPath}/jsp/backTeacher" method="post">
         <table style="line-height: 40px">
-            <input id="stuId" name="student_number" value="<%=student_number%>" type="hidden">
+            <input id="teaId" name="teacher_number" value="<%=teacher_number%>" type="hidden">
             <tr align="center">
                 <td><input type="submit" value="返回主页"></td>
             </tr>
